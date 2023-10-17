@@ -83,17 +83,18 @@ jobs:
       
       - name: Tag the image
         run: |
-          docker tag udac:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/udac:${{ github.sha }}
+          docker tag udac:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/udac:latest
 
       - name: Push to AWS ECR
         run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/udac:${{ github.sha }}
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/udac:latest
+          
 
       # - name: Use kubectl
       #   uses: azure/k8s-set-context@v1
       #   with:
       #     method: kubeconfig
       #     kubeconfig: ${{ secrets.KUBE_CONFIG }}
-
+# ${{ github.sha }}
       # - name: Deploy to Kubernetes
       #   run: kubectl apply -f kubernetes-manifests/
