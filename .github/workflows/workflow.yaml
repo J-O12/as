@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+  paths:
+    - 'as/**'
+
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version-file: .nvmrc
 
       - name: Install Dependencies
         working-directory: ./src
@@ -46,7 +49,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version-file: .nvmrc
 
       - name: Install Dependencies
         working-directory: ./src
