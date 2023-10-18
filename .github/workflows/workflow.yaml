@@ -28,7 +28,7 @@ jobs:
         run: npm run lint .
 
       - name: Handle Lint Errors
-        if: failure()  # Run only if lint fails
+        if: failure()  # Run only if lint failss
         run: npm lint --fix .
 
       - name: Run tests
