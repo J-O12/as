@@ -10,7 +10,31 @@ jobs:
   lint-and-test:
     runs-on: ubuntu-latest
     steps:
-      # ... (your existing steps for linting and testing)
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+
+      - name: Install Dependencies
+        working-directory: ./src
+        run: npm ci
+
+      - name: Run Lint
+        run: npm run lint .
+
+      - name: Handle Lint Errors
+        if: failure()  # Run only if lint fails
+        run: npm lint --fix .
+
+      - name: Run tests
+        run: npm test
+
+      - name: Handle Test Errors
+        if: failure()  # Run only if tests fail
+        run: echo "Tests failed. Please check and fix the issues."
 
   build:
     runs-on: ubuntu-latest
@@ -74,7 +98,6 @@ jobs:
       - name: Push to AWS ECR
         run: |
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/udac:${{ needs.build.outputs.IMAGE_TAG }}
-          
 
       # - name: Use kubectl
       #   uses: azure/k8s-set-context@v1
