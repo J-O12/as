@@ -101,6 +101,9 @@ jobs:
           kubectl apply -f ./k8s/aws-auth.yaml
           kubectl apply -f ./k8s/deployment.yml
           kubectl apply -f ./k8s/service.yml
+
+      - name: get pods
+        run: kubectl get pods
           
           
           
