@@ -5,8 +5,8 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - 'as/**'
+    # paths:
+    #   - 'as/**'
 
 jobs:
   lint-and-test:
