@@ -101,7 +101,11 @@ jobs:
           kubectl apply -f ./k8s/aws-auth.yaml
           kubectl apply -f ./k8s/deployment.yml
           kubectl apply -f ./k8s/service.yml
-          kubectl apply -f ./k8s/kustomization.yml
+          
+          
+          
+          
+    # kubectl apply -f ./k8s/kustomization.yml
 
 
 
