@@ -82,12 +82,12 @@ jobs:
         run: |
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/udac:${{ github.sha }}
 
-      - name: Use kubectl
-        uses: azure/k8s-set-context@v1
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v2
         with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG }} # I don't have secrets yet
-      - name: Deploy to Kubernetes
+          version: 'latest'
+
+      - name: Deploy image to amazon EKS
         run: kubectl apply -f ./k8s
 
 
